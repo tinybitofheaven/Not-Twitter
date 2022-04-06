@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <title></title>
+  </head>
+
+  <body>
+    {{! header }}
+    <header>
+      <a href="/login">
+        <img id="logo" src="img/logo.png" alt="logo.png" height="30px" />
+        <h1>Not Twitter</h1>
+      </a>
+    </header>
+
+    {{! nav bar }}
+    <ul>
+      <li><a href="/feed">Feed</a></li>
+      <li><a href="/profile">Profile</a></li>
+      <li><a href="/post">Post</a></li>
+    </ul>
+
+    <div>
+      {{! remove later }}
+      <hr />
+      {{{body}}}
+    </div>
+
+  </body>
+</html>
