@@ -29,20 +29,20 @@ app.set("views", path.join(__dirname, "public/views"));
 app.set("view engine", "hbs");
 
 // enable sessions
-const session = require("express-session");
-const sessionOptions = {
-  secret: "cookie_key", //TODO: move elsewhere
-  resave: true,
-  saveUninitialized: true,
-};
-app.use(session(sessionOptions));
+// const session = require("express-session");
+// const sessionOptions = {
+//   secret: "cookie_key", //TODO: move elsewhere
+//   resave: true,
+//   saveUninitialized: true,
+// };
+// app.use(session(sessionOptions));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // passport setup
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // make user data available to all templates
 app.use((req, res, next) => {
