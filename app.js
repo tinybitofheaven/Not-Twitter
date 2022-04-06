@@ -1,12 +1,12 @@
-require("./db");
-require("./auth");
+// require("./db");
+// require("./auth");
 
 const passport = require("passport");
 const express = require("express");
 const path = require("path");
 
 const routes = require("./routes/index");
-const post = require("./routes/post");
+// const post = require("./routes/post");
 
 const app = express();
 
