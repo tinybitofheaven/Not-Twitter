@@ -1,8 +1,11 @@
+// const express = require("express"),
+//   router = express.Router(),
+//   passport = require("passport"),
+//   mongoose = require("mongoose"),
+//   User = mongoose.model("User");
 const express = require("express"),
   router = express.Router(),
-  passport = require("passport"),
-  mongoose = require("mongoose"),
-  User = mongoose.model("User");
+  passport = require("passport");
 
 router.get("/logout", (req, res) => {
   req.logout();
@@ -30,18 +33,19 @@ router.get("/post", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  const { username, password } = req.body;
-  User.register(new User({ username }), req.body.password, (err, user) => {
-    if (err) {
-      res.render("signup", {
-        message: "Your registration information is not valid",
-      });
-    } else {
-      passport.authenticate("local")(req, res, function () {
-        res.redirect("/");
-      });
-    }
-  });
+  res.render("signup");
+  // const { username, password } = req.body;
+  // User.register(new User({ username }), req.body.password, (err, user) => {
+  //   if (err) {
+  //     res.render("signup", {
+  //       message: "Your registration information is not valid",
+  //     });
+  //   } else {
+  //     passport.authenticate("local")(req, res, function () {
+  //       res.redirect("/");
+  //     });
+  //   }
+  // });
 });
 
 router.post("/login", (req, res, next) => {
