@@ -7,6 +7,10 @@ const express = require("express"),
   router = express.Router(),
   passport = require("passport");
 
+router.get("/", (req, res) => {
+  res.redirect("/login");
+});
+
 router.get("/logout", (req, res) => {
   req.logout();
   res.redirect("/login");
