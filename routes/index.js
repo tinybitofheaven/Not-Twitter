@@ -6,6 +6,11 @@
 const express = require("express"),
   router = express.Router(),
   passport = require("passport");
+const mongoose = require("mongoose");
+const Users = mongoose.model("Users");
+const Posts = mongoose.model("Posts");
+const Tweet = mongoose.model("Tweet");
+// const app = express();
 
 router.get("/", (req, res) => {
   res.redirect("/login");
@@ -25,7 +30,10 @@ router.get("/signup", (req, res) => {
 });
 
 router.get("/feed", (req, res) => {
-  res.render("feed");
+  Tweet.find({}, function (err, tweets, count) {
+    console.log(tweets);
+    res.render("feed", { tweets: tweets });
+  });
 });
 
 router.get("/profile", (req, res) => {
@@ -34,6 +42,23 @@ router.get("/profile", (req, res) => {
 
 router.get("/post", (req, res) => {
   res.render("post");
+});
+
+router.post("/post", (req, res) => {
+  const user = "admin-01"; //change to get users dynamically
+  const tweet = req.body.input;
+  //get image
+
+  new Tweet({
+    user_id: user,
+    tweet: tweet,
+  }).save(function (err, review, count) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/feed");
+    }
+  });
 });
 
 router.post("/signup", (req, res) => {
