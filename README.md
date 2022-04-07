@@ -6,10 +6,10 @@ Not Twitter is like Twitter but simpler. You'll be able to make an account, post
 
 ## Data Model
 
-The application will store Users and Posts
+The application will store Users and Tweets
 
-* users can have many posts
-* posts can have text and/or images
+- users can have many tweets
+- posts can have text and/or images
 
 An Example User:
 
@@ -23,18 +23,18 @@ An Example User:
 }
 ```
 
-An Example Post with Embedded Items:
+An Example Tweet with Embedded Items:
 
 ```javascript
 {
-  user: // a reference to a User object
-  text: "I posted something!", //or null if user does not write text
+  user_id: // a reference to a User object
+  tweet: "I posted something!", //or null if user does not write text
   image: //a referencce to an image file in MongoDB or null if user does not upload an image
   createdAt: // timestamp
 }
 ```
 
-## [Link to Commented First Draft Schema](db.js) 
+## [Link to Commented First Draft Schema](db.js)
 
 ## Wireframes
 
@@ -58,7 +58,6 @@ An Example Post with Embedded Items:
 
 ![signup](documentation/signup.png)
 
-
 ## Site map
 
 ![list create](documentation/site-map.png)
@@ -75,26 +74,29 @@ An Example Post with Embedded Items:
 
 ## Research Topics
 
-* (2 points) Integrate user authentication
-    * Use passport for user authentication
-    * And account has been made for testing
-    * see <code>TBA</code> for signup page
-    * see <code>TBA</code> for login page
-* (3 points) Perform client side form validation using a JavaScript library
-    * see <code>TBA</code>
-    * confirm that either an image or text has been entered for a new post
-    * confirm that posts to be deleted actually exist
-* (3 points) Use GridFS
-    * GridFS allows images to be stored on MongoDB
-    * Not Twitter needs to allow users to post images (both for their profile pictures and posts)
-    * images need to be able to be retrieved later on for display
-    * [GridFS documentation](https://data-flair.training/blogs/mongodb-gridfs-tutorial/)
+- (2 points) Integrate user authentication
+  - Use passport for user authentication
+  - And account has been made for testing
+  - see <code>TBA</code> for signup page
+  - see <code>TBA</code> for login page
+- (2 points) Use Heroku to deploy
+  - Heroku allows for the site to be accessible anytime without being hosted locally
+  - Allows many users can access it at once
+- (1) Use MongoDB Atlas
+  - For storing collections of data
+  - Good for managing different user data
+  - Allows for easy linking to heroku
+- (3 points) Use GridFS
+  - GridFS allows images to be stored on MongoDB
+  - Not Twitter needs to allow users to post images (both for their profile pictures and posts)
+  - images need to be able to be retrieved later on for display
+  - [GridFS documentation](https://data-flair.training/blogs/mongodb-gridfs-tutorial/)
 
 8 points total out of 8 required points
 
-
-## [Link to Initial Main Project File](app.js) 
+## [Link to Initial Main Project File](app.js)
 
 ## Annotations / References Used
 
-1. TBA
+1. https://www.freecodecamp.org/news/how-to-deploy-an-application-to-heroku/
+2. https://www.mongodb.com/developer/how-to/use-atlas-on-heroku/#get-your-atlas-cluster-connection-string
