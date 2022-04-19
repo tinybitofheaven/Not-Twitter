@@ -7,11 +7,11 @@
       </a>
       <div id="profile-marg">
         <div id="profile-name">
-          <a href="#">Lorem ipsum</a>
+          <a href="#">{{user.name}}</a>
         </div>
         <div id="profile-at">
           <span>
-            <a href="#">@<span>Lorem ipsum</span></a>
+            <a href="#">@<span>{{user.username}}</span></a>
           </span>
         </div>
       </div>
@@ -19,23 +19,23 @@
   </div>
 </div>
 
-<div class="tweet-wrap">
-  <div class="tweet-header">
-    <img src="img/profile.png" alt="profile.png" class="profile" />
-    <div class="tweet-header-info">
-      Lorem ipsum
-      <span>@Lorem ipsum</span><span>. Jun 27
-      </span>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In scelerisque
-        pharetra laoreet. Quisque in sem vel metus hendrerit sodales. Orci
-        varius natoque penatibus et magnis dis parturient montes, nascetur
-        ridiculus mus. Quisque dictum euismod leo ac mattis. In lobortis, tortor
-        vitae fringilla vehicula, magna dui feugiat mi, vel aliquet metus ligula
-        ut sem.</p>
+{{#each tweets as |t|}}
+  <div class="tweet-wrap">
+    <div class="tweet-header">
+      <img src="img/profile.png" alt="profile.png" class="profile" />
+      <div class="tweet-header-info">
+        <form action="/delete" method="post">
+          <input type="hidden" name="id" value="{{t._id}}" />
+          <button class="btn" type="submit">Delete</button>
+        </form>
+        {{t.user_id}}
+        <span>@{{t.user_id}}</span><span>{{t.date}}</span>
+        <p>{{t.tweet}}</p>
 
-      <div class="tweet-img-wrap">
-        <img src="img/twit-img.jpg" alt="twit-img.jpg" class="tweet-img" />
+        <div class="tweet-img-wrap">
+          <img src="img/twit-img.jpg" alt="twit-img.jpg" class="tweet-img" />
+        </div>
       </div>
     </div>
   </div>
-</div>
+{{/each}}

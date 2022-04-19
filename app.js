@@ -1,15 +1,12 @@
 require("./db.js");
-// require("./auth");
+require("./auth");
 
 const passport = require("passport");
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const Users = mongoose.model("Users");
-const Posts = mongoose.model("Posts");
+const User = mongoose.model("User");
 const routes = require("./routes/index");
-
-// const post = require("./routes/post");
 
 const app = express();
 
@@ -32,20 +29,20 @@ app.set("views", path.join(__dirname, "public/views"));
 app.set("view engine", "hbs");
 
 // enable sessions
-// const session = require("express-session");
-// const sessionOptions = {
-//   secret: "cookie_key", //TODO: move elsewhere
-//   resave: true,
-//   saveUninitialized: true,
-// };
-// app.use(session(sessionOptions));
+const session = require("express-session");
+const sessionOptions = {
+  secret: "cookie_key", //TODO: move elsewhere
+  resave: true,
+  saveUninitialized: true,
+};
+app.use(session(sessionOptions));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // passport setup
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //https://www.mongodb.com/developer/how-to/use-atlas-on-heroku/#get-your-atlas-cluster-connection-string
 // const client = new MongoClient(uri, { useUnifiedTopology: true });

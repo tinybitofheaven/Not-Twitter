@@ -7,13 +7,25 @@ const express = require("express"),
   router = express.Router(),
   passport = require("passport");
 const mongoose = require("mongoose");
-const Users = mongoose.model("Users");
-const Posts = mongoose.model("Posts");
+const User = mongoose.model("User");
 const Tweet = mongoose.model("Tweet");
-// const app = express();
+
+function loggedIn(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+}
 
 router.get("/", (req, res) => {
-  res.redirect("/login");
+  if (req.isAuthenticated()) {
+    // The user is logged in
+    res.redirect("/feed");
+  } else {
+    // The user is logged out
+    res.redirect("/login");
+  }
 });
 
 router.get("/logout", (req, res) => {
@@ -29,23 +41,44 @@ router.get("/signup", (req, res) => {
   res.render("signup");
 });
 
-router.get("/feed", (req, res) => {
+router.get("/feed", loggedIn, (req, res) => {
   Tweet.find({}, function (err, tweets, count) {
-    console.log(tweets);
-    res.render("feed", { tweets: tweets });
+    const dates = [];
+    for (const tweet of tweets) {
+      const month = tweet.createdAt.getUTCMonth() + 1; //months from 1-12
+      const day = tweet.createdAt.getUTCDate();
+      const year = tweet.createdAt.getUTCFullYear();
+      const hoursAndMinutes =
+        tweet.createdAt.getHours() + ":" + tweet.createdAt.getMinutes();
+      const date = day + "/" + month + "/" + year + " " + hoursAndMinutes;
+      tweet["date"] = date;
+    }
+    //console.log(tweets);
+    res.render("feed", { tweets: tweets, dates: dates });
   });
 });
 
-router.get("/profile", (req, res) => {
-  res.render("profile");
+router.get("/profile", loggedIn, (req, res) => {
+  console.log(req.user);
+  Tweet.find({ user_id: req.user.username }, function (err, tweets, count) {
+    res.render("profile", { user: req.user, tweets: tweets });
+  });
 });
 
-router.get("/post", (req, res) => {
+router.get("/post", loggedIn, (req, res) => {
   res.render("post");
 });
 
+router.post("/delete", (req, res) => {
+  var id = req.body.id;
+  Tweet.findByIdAndRemove(id, function (err, deletedTweet) {
+    // handle any potential errors here
+    res.redirect("/profile");
+  });
+});
+
 router.post("/post", (req, res) => {
-  const user = "admin-01"; //change to get users dynamically
+  const user = req.user.username; //change to get users dynamically
   const tweet = req.body.input;
   //get image
 
@@ -62,26 +95,34 @@ router.post("/post", (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  res.render("signup");
-  // const { username, password } = req.body;
-  // User.register(new User({ username }), req.body.password, (err, user) => {
-  //   if (err) {
-  //     res.render("signup", {
-  //       message: "Your registration information is not valid",
-  //     });
-  //   } else {
-  //     passport.authenticate("local")(req, res, function () {
-  //       res.redirect("/");
-  //     });
-  //   }
-  // });
+  var username = req.body.username;
+  var password = req.body.password;
+  User.register(
+    new User({ username, hash: password, name: username }),
+    req.body.password,
+    (err, user) => {
+      if (err) {
+        console.log(err);
+        res.render("signup", {
+          message: "Your registration information is not valid",
+        });
+      } else {
+        passport.authenticate("local", {
+          successRedirect: "/",
+          failureRedirect: "/login",
+        })(req, res, function () {
+          res.redirect("/");
+        });
+      }
+    }
+  );
 });
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user) => {
     if (user) {
       req.logIn(user, (err) => {
-        res.redirect("/");
+        res.redirect("/feed");
       });
     } else {
       res.render("login", { message: "Your login or password is incorrect." });

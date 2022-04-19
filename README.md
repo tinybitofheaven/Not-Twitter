@@ -77,8 +77,6 @@ An Example Tweet with Embedded Items:
 - (2 points) Integrate user authentication
   - Use passport for user authentication
   - And account has been made for testing
-  - see <code>TBA</code> for signup page
-  - see <code>TBA</code> for login page
 - (2 points) Use Heroku to deploy
   - Heroku allows for the site to be accessible anytime without being hosted locally
   - Allows many users can access it at once
