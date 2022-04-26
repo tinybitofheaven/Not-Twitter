@@ -11,6 +11,7 @@ const User = mongoose.model("User");
 const Tweet = mongoose.model("Tweet");
 
 function loggedIn(req, res, next) {
+  //https://stackoverflow.com/questions/38820251/how-is-req-isauthenticated-in-passport-js-implemented
   if (req.isAuthenticated()) {
     next();
   } else {
@@ -19,13 +20,7 @@ function loggedIn(req, res, next) {
 }
 
 router.get("/", (req, res) => {
-  if (req.isAuthenticated()) {
-    // The user is logged in
-    res.redirect("/feed");
-  } else {
-    // The user is logged out
-    res.redirect("/login");
-  }
+  res.redirect("/feed");
 });
 
 router.get("/logout", (req, res) => {
@@ -104,7 +99,7 @@ router.post("/delete", (req, res) => {
 });
 
 router.post("/post", (req, res) => {
-  const user = req.user.username; //change to get users dynamically
+  const user = req.user.username;
   const tweet = req.body.input;
   //get image
 

@@ -55,6 +55,6 @@ app.use(express.json());
 app.use("/", routes);
 // app.use('/???', post);
 
-app.listen(3000);
+// app.listen(3000);
 //https://www.freecodecamp.org/news/how-to-deploy-an-application-to-heroku/
-// app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000);

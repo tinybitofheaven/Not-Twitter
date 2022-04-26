@@ -4,9 +4,8 @@ const mongoose = require("mongoose"),
   passportLocalMongoose = require("passport-local-mongoose");
 
 //https://www.mongodb.com/developer/how-to/use-atlas-on-heroku/#get-your-atlas-cluster-connection-string
-const uri =
-  "mongodb+srv://admin-01:byGSzd1coOLTqnaZ@ait-cluster-1.ocfhd.mongodb.net/notTwitter?retryWrites=true&w=majority";
-// const uri = process.env.MONGODB_URI;
+// const uri = "mongodb+srv://admin-01:byGSzd1coOLTqnaZ@ait-cluster-1.ocfhd.mongodb.net/notTwitter?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
 
 // users
 // * site requires authentication
