@@ -44,39 +44,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 app.use(passport.session());
 
-//https://www.mongodb.com/developer/how-to/use-atlas-on-heroku/#get-your-atlas-cluster-connection-string
-// const client = new MongoClient(uri, { useUnifiedTopology: true });
-
-// try {
-//   await client.connect();
-
-//   // const database = client.db("sample_mflix");
-//   // const collection = database.collection("movies");
-
-//   // Query for a movie that has the title 'Back to the Future'
-//   // const query = { genres: "Comedy", poster: { $exists: true } };
-//   // const cursor = await collection.aggregate([
-//   //   { $match: query },
-//   //   { $sample: { size: 1 } },
-//   //   { $project:
-//   //     {
-//   //       title: 1,
-//   //       fullplot: 1,
-//   //       poster: 1
-//   //     }
-//   //   }
-//   // ]);
-
-//   // const movie = await cursor.next();
-
-//   // return res.json(movie);
-// } catch (err) {
-//   console.log(err);
-// } finally {
-//   // Ensures that the client will close when you finish/error
-//   await client.close();
-// }
-
 // make user data available to all templates
 app.use((req, res, next) => {
   res.locals.user = req.user;
@@ -88,6 +55,6 @@ app.use(express.json());
 app.use("/", routes);
 // app.use('/???', post);
 
-// app.listen(3000);
+app.listen(3000);
 //https://www.freecodecamp.org/news/how-to-deploy-an-application-to-heroku/
-app.listen(process.env.PORT || 3000);
+// app.listen(process.env.PORT || 3000);

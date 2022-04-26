@@ -54,14 +54,41 @@ router.get("/feed", loggedIn, (req, res) => {
       tweet["date"] = date;
     }
     //console.log(tweets);
-    res.render("feed", { tweets: tweets, dates: dates });
+    res.render("feed", { tweets: tweets });
+  });
+});
+
+router.post("/search", loggedIn, (req, res) => {
+  Tweet.find({}, function (err, tweets, count) {
+    // console.log(req.body.keyword);
+    const results = tweets.filter((tweet) =>
+      tweet.tweet.includes(req.body.keyword)
+    );
+    // console.log(results);
+    results.map((tweet) => {
+      const month = tweet.createdAt.getUTCMonth() + 1; //months from 1-12
+      const day = tweet.createdAt.getUTCDate();
+      const year = tweet.createdAt.getUTCFullYear();
+      const hoursAndMinutes =
+        tweet.createdAt.getHours() + ":" + tweet.createdAt.getMinutes();
+      const date = day + "/" + month + "/" + year + " " + hoursAndMinutes;
+      tweet["date"] = date;
+    });
+
+    res.render("feed", {
+      tweets: results,
+      search: 'Search: "' + req.body.keyword + '"',
+    });
   });
 });
 
 router.get("/profile", loggedIn, (req, res) => {
-  console.log(req.user);
-  Tweet.find({ user_id: req.user.username }, function (err, tweets, count) {
-    res.render("profile", { user: req.user, tweets: tweets });
+  // console.log(req.user);
+  Tweet.find({}, function (err, tweets, count) {
+    const results = tweets.filter(
+      (tweet) => tweet.user_id === req.user.username
+    );
+    res.render("profile", { user: req.user, tweets: results });
   });
 });
 
@@ -72,7 +99,6 @@ router.get("/post", loggedIn, (req, res) => {
 router.post("/delete", (req, res) => {
   var id = req.body.id;
   Tweet.findByIdAndRemove(id, function (err, deletedTweet) {
-    // handle any potential errors here
     res.redirect("/profile");
   });
 });

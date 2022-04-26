@@ -4,9 +4,9 @@ const mongoose = require("mongoose"),
   passportLocalMongoose = require("passport-local-mongoose");
 
 //https://www.mongodb.com/developer/how-to/use-atlas-on-heroku/#get-your-atlas-cluster-connection-string
-// const uri =
-// "mongodb+srv://admin-01:byGSzd1coOLTqnaZ@ait-cluster-1.ocfhd.mongodb.net/notTwitter?retryWrites=true&w=majority";
-const uri = process.env.MONGODB_URI;
+const uri =
+  "mongodb+srv://admin-01:byGSzd1coOLTqnaZ@ait-cluster-1.ocfhd.mongodb.net/notTwitter?retryWrites=true&w=majority";
+// const uri = process.env.MONGODB_URI;
 
 // users
 // * site requires authentication
@@ -16,7 +16,7 @@ const uri = process.env.MONGODB_URI;
 const User = new mongoose.Schema({
   username: { type: String, required: true, trim: true, lowercase: true },
   hash: { type: String, required: true },
-  posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Posts" }],
+  // posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Posts" }],
   name: { type: String, required: true },
   // profilePicture: {type: Image, required: true} //will figure out how to store/retrieve images later
 });
