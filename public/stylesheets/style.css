@@ -295,3 +295,7 @@ li a:hover:not(.active) {
 .image-btn:hover {
   background-color: rgb(101, 101, 126);
 }
+
+.form-row a:hover {
+  color: #45a049;
+}
