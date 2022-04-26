@@ -1,10 +1,12 @@
-<form method="POST" action="">
-  {{message}}
-  <div class="form-row"><label>Username:</label>
-    <input name="username" type="text" required /></div>
-  <div class="form-row"><label>Password:</label>
-    <input name="password" type="password" required /></div>
-  <div class="form-row"><input type="submit" value="Login" /></div>
-  <div class="form-row">Don't have an account?
-    <a href="/signup">Signup</a>.</div>
-</form>
+<div class="form">
+  <form method="POST" action="">
+    {{message}}
+    <div class="form-row"><label>Username:</label>
+      <input name="username" type="text" required /></div>
+    <div class="form-row"><label>Password:</label>
+      <input name="password" type="password" required /></div>
+    <div class="form-row"><input type="submit" value="Login" /></div>
+    <div class="form-row">Don't have an account?
+      <a href="/signup">Signup</a>.</div>
+  </form>
+</div>

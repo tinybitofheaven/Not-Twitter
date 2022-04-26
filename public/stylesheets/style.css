@@ -1,12 +1,12 @@
 body {
-  padding: 50px;
   font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-body {
+  margin: 0;
   background: #e6ecf0;
-  /* font-family: 'Asap', sans-serif; */
-  /* font-family: 'Roboto', sans-serif; */
+  padding-top: 1em;
+}
+#body {
+  padding: 50px;
+  margin: 0;
 }
 
 img {
@@ -105,16 +105,6 @@ img {
   margin-top: 1em;
 }
 
-textarea {
-  width: 100%;
-  margin: 1em;
-  border-radius: 1em;
-  padding: 1em;
-  height: 5em;
-  /* font-family: 'Courier New', monospace; */
-  font-size: 1em;
-}
-
 .tweet-wrap {
   /* change for size */
   max-width: 490px;
@@ -210,4 +200,98 @@ input[type="submit"] {
 
 #search-term {
   padding-top: 10px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #0073aa;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #45a049;
+}
+
+.form-row input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-row input[type="password"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-row input[type="submit"] {
+  width: 100%;
+  background-color: white;
+  color: #0073aa;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-row input[type="submit"]:hover {
+  background-color: #45a049;
+  color: white;
+}
+
+.form {
+  border-radius: 5px;
+  background-color: #0073aa;
+  padding: 20px;
+  color: white;
+}
+
+.form a {
+  color: white;
+}
+
+.form-row textarea {
+  width: 95%;
+  margin: 1em;
+  border-radius: 1em;
+  padding: 1em;
+  height: 5em;
+  font-size: 1em;
+}
+
+.image-btn {
+  width: 100%;
+  background-color: rgb(79, 79, 92);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.image-btn:hover {
+  background-color: rgb(101, 101, 126);
 }
